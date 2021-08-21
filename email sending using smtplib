@@ -1,0 +1,27 @@
+#importing libraries
+import smtplib as srvr
+
+#Setting of server along with port
+#587 is a TLS port number used for gmail
+obj=srvr.SMTP("smtp.gmail.com",587)
+obj.starttls()
+
+#Login credentials
+Sender_account=input("Enter User Account: ")
+Sender_pass=input("Enter Password: ")
+try:
+    obj.login(Sender_account,Sender_pass)
+except:
+    print("Login Error")
+
+#Creating subject and body for the email
+subject="Invitation for the upcoming webinar on IT"
+body="This is to inform you with the advancement and growing it industries,it is must for everyone to walk alongwith it and gain as much as exposure they can and....."
+
+#This is one of the easy method for sending messages
+message="Subject:{}\n\n{}".format(subject,body)
+#In multiple account one can send mail alongwith
+ListOfAccount=["devendrayadavdb@gmail.com"]
+obj.sendmail(Sender_account,ListOfAccount,message)
+print("Message sent successfully")
+obj.quit()
